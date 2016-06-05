@@ -373,13 +373,13 @@ $(document).ready(function() {
         valign: 'middle',
         sortable: true
     });
-    columns.push({
-        field: 'apartment_floor',
-        title: '楼层',
-        align: 'center',
-        valign: 'middle',
-        sortable: true
-    });
+    // columns.push({
+    //     field: 'apartment_floor',
+    //     title: '楼层',
+    //     align: 'center',
+    //     valign: 'middle',
+    //     sortable: true
+    // });
     columns.push({
         field: 'apartment_status',
         title: '租赁状态',
@@ -389,8 +389,22 @@ $(document).ready(function() {
         sortable: true
     });
     columns.push({
+        field: 'apartment_person_num',
+        title: '人数',
+        align: 'center',
+        valign: 'middle',
+        sortable: true
+    });
+    columns.push({
         field: 'tenant_name',
         title: '租客姓名',
+        align: 'center',
+        valign: 'middle',
+        sortable: true
+    });
+    columns.push({
+        field: 'apartment_nextcharge_point',
+        title: '租金到期日',
         align: 'center',
         valign: 'middle',
         sortable: true
@@ -402,13 +416,7 @@ $(document).ready(function() {
         valign: 'middle',
         sortable: true
     });
-    columns.push({
-        field: 'apartment_person_num',
-        title: '入住人数',
-        align: 'center',
-        valign: 'middle',
-        sortable: true
-    });
+
     columns.push({
         field: 'contract_starttime',
         title: '合同起始日',

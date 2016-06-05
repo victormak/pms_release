@@ -179,6 +179,9 @@ function onCheckout(apartmentName) {
     var trashFee;
     var monthEletrFee;
     var everyKwhFee;
+
+    $('#checkOutModalRoomName').html(apartmentName);
+
     $.ajax({
         url: "getFeeItemAll.action",
         dataType: "json",
@@ -295,6 +298,7 @@ function onCheckout(apartmentName) {
 
 function onChargeRent(apartmentName) {
     var roomObj = findDataByRoomName(dataObjs, apartmentName);
+    $('#chargeMonthModalRoomName').html(apartmentName);
     var rentExpected = parseInt(roomObj.contract_deposit, 10) * parseInt(roomObj.contract_frequency, 10);
     var ownFeeNode = $('#charge_month_owe');
     var actualFeeNode = $('#charge_month_actual');
@@ -342,6 +346,8 @@ function onChargeOtherFee(apartmentName) {
     currentEletrNode[0].value = "";
     var currentWaterMeterNode = $('#charge_other_current_water_meter');
     currentWaterMeterNode[0].value = "";
+
+    $('#chargeOtherModalRoomName').html(apartmentName);
 
     var roomObj = findDataByRoomName(dataObjs, apartmentName);
     var lastElectric = roomObj.apartment_electric_fee;
@@ -428,8 +434,6 @@ function onChargeOtherFee(apartmentName) {
             });
         }
     });
-
-
 
     $('#charge_other_fee_modal').modal();
 }

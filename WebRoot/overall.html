@@ -192,12 +192,12 @@
         </section>
         <!-- /.vbox -->
     </section>
-    <div class="modal fade" id="checkin" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal fade" id="checkin" tabindex="-1" role="dialog" aria-labelledby="overallModalTitle">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title text-primary" id="myModalLabel">入住登记</h4>
+                    <h4 class="modal-title text-primary" id="overallModalTitle">入住登记</h4>
                 </div>
                 <div class="modal-body">
                     <form id="checkin_form" action="check_in.action" class="form-horizontal" role="form" method="post">
@@ -386,12 +386,14 @@
             </div>
         </div>
     </div>
-    <div class="modal fade" id="charge_other_fee_modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal fade" id="charge_other_fee_modal" tabindex="-1" role="dialog" aria-labelledby="overallModalTitleWithRoomName">
         <div class="modal-dialog" role="document">
             <div class="modal-content" style="width:700px;">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title text-primary" id="myModalLabel">收取每月杂费</h4>
+                    <h4 class="modal-title text-primary" id="overallModalTitleWithRoomName">收取每月杂费 - 
+                    <span id="chargeOtherModalRoomName"></span>
+                    </h4>
                 </div>
                 <form id="charge_other_fee_form" action="charge_other_fee.action" class="form-horizontal" role="form" method="post">
                     <div class="modal-body">
@@ -476,18 +478,19 @@
             </div>
         </div>
     </div>
-    <div class="modal fade" id="charge_month_fee_modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal fade" id="charge_month_fee_modal" tabindex="-1" role="dialog" aria-labelledby="overallModalTitleWithRoomName">
         <div class="modal-dialog" role="document">
             <div class="modal-content" style="width:700px;">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title text-primary" id="myModalLabel">收租</h4>
+                    <h4 class="modal-title text-primary" id="overallModalTitleWithRoomName">收租 - 
+                        <span id="chargeMonthModalRoomName"></span>
+                    </h4>
                 </div>
                 <form id="charge_month_fee_form" action="charge_month_fee.action" class="form-horizontal" role="form" method="post">
                     <div class="modal-body">
                         <div class="panel ">
                             <div class="form-group row rowMarginTop modalPanel">
-
                                 <div style="display:none">
                                     <label class="col-md-2 control-label">应收</label>
                                     <div class="col-md-2">
@@ -495,13 +498,13 @@
                                     </div>
                                 </div>
                                 <label for="charge_month_fee_contract_frequency" class="col-md-2 control-label">周期</label>
-                                    <div class="input-group date form_date col-md-4" data-date="" data-date-format="yyyy-mm-dd" data-link-field="charge_month_fee_contract_frequency" data-link-format="yyyy-mm-dd">
-                                        <input class="form-control" size="16" type="text" value="" readonly>
-                                        <span class="input-group-addon">
+                                <div class="input-group date form_date col-md-4" data-date="" data-date-format="yyyy-mm-dd" data-link-field="charge_month_fee_contract_frequency" data-link-format="yyyy-mm-dd">
+                                    <input class="form-control" size="16" type="text" value="" readonly>
+                                    <span class="input-group-addon">
                                                 <span class="glyphicon glyphicon-calendar"></span>
-                                        </span>
-                                    </div>
-                                    <input name="apartment.apartment_nextcharge_point" type="hidden" id="charge_month_fee_contract_frequency" />
+                                    </span>
+                                </div>
+                                <input name="apartment.apartment_nextcharge_point" type="hidden" id="charge_month_fee_contract_frequency" />
                                 <div>
                                     <label class="col-md-2 control-label">实收</label>
                                     <div class="col-md-2">
@@ -530,12 +533,14 @@
             </div>
         </div>
     </div>
-    <div class="modal fade" id="charge_owe_fee_modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal fade" id="charge_owe_fee_modal" tabindex="-1" role="dialog" aria-labelledby="overallModalTitleWithRoomName">
         <div class="modal-dialog" role="document">
             <div class="modal-content" style="width:700px;">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title text-primary" id="myModalLabel">收取欠费</h4>
+                    <h4 class="modal-title text-primary" id="overallModalTitleWithRoomName">收取欠费
+                    <span id="ownModalRoomName"></span>
+                </h4>
                 </div>
                 <form id="charge_owe_fee_form" action="charge_owe_fee.action" class="form-horizontal" role="form" method="post">
                     <div class="modal-body">
@@ -575,12 +580,14 @@
             </div>
         </div>
     </div>
-    <div class="modal fade" id="checkout_modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal fade" id="checkout_modal" tabindex="-1" role="dialog" aria-labelledby="overallModalTitleWithRoomName">
         <div class="modal-dialog" role="document">
             <div class="modal-content" style="width:700px;">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title text-primary" id="myModalLabel">退房</h4>
+                    <h4 class="modal-title text-primary" id="overallModalTitleWithRoomName">退房 - 
+                    <span id="checkOutModalRoomName"></span>
+                </h4>
                 </div>
                 <form id="checkout_form" action="check_out.action" class="form-horizontal" role="form" method="post">
                     <div class="modal-body">

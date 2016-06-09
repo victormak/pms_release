@@ -14,9 +14,9 @@
 	 	
 	 	
 		<action name="sigin" class="com.pms.action.UserAction" method="sigin">
-			<result name="overall">/overall.html</result>
-			<result name="room_man">/room_manager.html</result>
-			<result name="false">/login.html</result>
+			<result name="overall" type="redirect">/overall.html</result>
+			<result name="room_man" type="redirect">/room_manager.html</result>
+			<result name="false" type="redirect">/login.html</result>
 		</action>
 	 	<action name="getFeeItemAll" class ="com.pms.action.FeeItemAction" method ="getFeeItemAll"></action>
 	 	<action name="modifyFeeItem" class ="com.pms.action.FeeItemAction" method ="modifyFeeItem"></action>

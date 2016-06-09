@@ -150,9 +150,13 @@ $(document).ready(function() {
             // $('#modifyUserId').val(userOjb.user_id);
             // $('#modifyUser').modal();
 
+            $('#checkin_alert_msg').hide();
             $('#checkin_apartment_person_num')[0].value = "1";
             $('#checkin_contract_start')[0].value = "";
             $('#checkin_contract_end')[0].value = "";
+            $('#checkin_contract_start_show')[0].value = "";
+            $('#checkin_contract_end_show')[0].value = "";
+            $('#checkin_contract_frequency_next_show')[0].value = "";
             $('#checkin_contract_month_price')[0].value = "";
             $('#checkin_contract_deposit')[0].value = "";
             $('#checkin_contract_frequency')[0].value = "";
@@ -164,13 +168,21 @@ $(document).ready(function() {
             $('#checkin_tenant_phonenumber')[0].value = "";
             $('#checkin_tenant_age')[0].value = "";
             $('#checkin_tenant_desc')[0].value = "";
+            $('#checkin_contract_end_div').removeClass('has-error has-success');
+            $('#checkin_person_num_div').removeClass('has-error has-success');
+            $('#checkin_contract_start_div').removeClass('has-error has-success');
+            $('#checkin_frequency_next_div').removeClass('has-error has-success');
+            $('#checkin_water_div').removeClass('has-error has-success');
+            $('#checkin_electric_div').removeClass('has-error has-success');
+            $('#checkin_tenant_name_div').removeClass('has-error has-success');
+            $('.help-block').hide();
 
             if (waterMode === '1') {
                 $('#checkin_water_div').hide();
             }
 
             var roomObj = row;
-            console.log(roomObj);
+            // console.log(roomObj);
             $('#checkin_apartment_electric_fee')[0].value = roomObj.apartment_electric_fee;
             $('#checkin_apartment_water_meter')[0].value = roomObj.apartment_water_meter;
             $('#checkin_apartment_area')[0].value = domainCode;
@@ -179,7 +191,7 @@ $(document).ready(function() {
             $('#checkin_apartment_apartment_id')[0].value = roomObj.apartment_id;
             $('#checkin_user_name')[0].value = userName;
 
-            $('#checkin').modal();
+            $('#testModal').modal();
         },
         'click .modify': function(e, value, row, index) {
             // alert('You click checkin action, row: ' + JSON.stringify(row));
@@ -447,7 +459,57 @@ $(document).ready(function() {
         formatter: operateFormatter
     });
 
-    // var allRoomDataObjs;
+    $("#checkin_form").validation({
+        reqmark: false,
+        icon: false
+    });
+
+    $("#checkinOK").on('click', function(event) {
+        var name = $('#checkin_tenant_name')[0].value;
+        var electricKwh = $('#checkin_apartment_electric_fee')[0].value;
+        var waterMeter = $('#checkin_apartment_water_meter')[0].value;
+        var startDate = $('#checkin_contract_start')[0].value;
+        var endDate = $('#checkin_contract_end')[0].value;
+        var freq = $('#checkin_contract_frequency_next')[0].value;
+
+        var isCheckPass = false;
+        if (waterMode === '1') {
+            isCheckPass = (name !== '') && (electricKwh !== '') && (startDate !== '') && (endDate !== '') && (freq !== null);
+        } else {
+            isCheckPass = (name !== '') && (electricKwh !== '') && (startDate !== '') && (endDate !== '') && (freq !== null) && (waterMeter !== '');
+        }
+
+        if (!isCheckPass) {
+            $('#checkin_alert_msg').show();
+        }
+
+
+        if ($("#checkin_form").valid('填写信息不完整') === false) {
+
+            return false;
+        }
+
+
+    });
+
+    $("#okbtn").on('click', function(event) {
+        alert("shit");
+        return true;
+    });
+
+    $("#form3").validation(function(obj, params) {
+        //扩展校验方法
+    }, { reqmark: false, icon: false });
+    //.注册
+    $("#submit3").on('click', function(event) {
+        // 2.最后要调用 valid()方法。
+        if ($("#form3").valid('填写信息不完整。') === false) {
+            alert('填写信息不完整。');
+            console.log('填写信息不完整。')
+            return false;
+        }
+    });
+
     $.ajax({
         type: "POST",
 
@@ -462,10 +524,6 @@ $(document).ready(function() {
             });
         }
     });
-
-
-
-
 
     $('#datetimepicker1').datetimepicker({
         language: 'zh-CN'
@@ -522,8 +580,6 @@ $(document).ready(function() {
             checkin_owe[0].value = oweFee;
         }
     });
-
-
 
 
 });

@@ -1,5 +1,6 @@
 var domainObjs;
 var permissionArray = [];
+// var userPermission;
 
 function onGetChecked() {
     permissionArray = [];
@@ -68,14 +69,21 @@ $(document).ready(function() {
         selections = [];
 
     function operateFormatter(value, row, index) {
-        return [
-            '<a class="like" href="javascript:void(0)" title="修改">',
-            '<i class="icon-pencil text-primary"></i>',
-            '</a>  ',
-            '<a class="remove" href="javascript:void(0)" title="删除">',
-            '<i class="icon-remove text-danger"></i>',
-            '</a>'
-        ].join('');
+        console.log(row.user_permission);
+        if (row.user_permission !== '超级管理员') {
+            return [
+                '<a class="like" href="javascript:void(0)" title="修改">',
+                '<i class="icon-pencil text-primary"></i>',
+                '</a>  ',
+                '<a class="remove" href="javascript:void(0)" title="删除">',
+                '<i class="icon-remove text-danger"></i>',
+                '</a>'
+            ].join('');
+        } else {
+            return ['<span>-</span>'].join('');
+        }
+
+
     }
 
     function getIdSelections() {

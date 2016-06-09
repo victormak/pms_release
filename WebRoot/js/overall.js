@@ -122,9 +122,13 @@ function onHideBtns(roomName) {
 }
 
 function onChecninClick(roomName) {
+    $('#checkin_alert_msg').hide();
     $('#checkin_apartment_person_num')[0].value = "1";
     $('#checkin_contract_start')[0].value = "";
     $('#checkin_contract_end')[0].value = "";
+    $('#checkin_contract_start_show')[0].value = "";
+    $('#checkin_contract_end_show')[0].value = "";
+    $('#checkin_contract_frequency_next_show')[0].value = "";
     $('#checkin_contract_month_price')[0].value = "";
     $('#checkin_contract_deposit')[0].value = "";
     $('#checkin_contract_frequency')[0].value = "";
@@ -136,6 +140,14 @@ function onChecninClick(roomName) {
     $('#checkin_tenant_phonenumber')[0].value = "";
     $('#checkin_tenant_age')[0].value = "";
     $('#checkin_tenant_desc')[0].value = "";
+    $('#checkin_contract_end_div').removeClass('has-error has-success');
+    $('#checkin_person_num_div').removeClass('has-error has-success');
+    $('#checkin_contract_start_div').removeClass('has-error has-success');
+    $('#checkin_frequency_next_div').removeClass('has-error has-success');
+    $('#checkin_water_div').removeClass('has-error has-success');
+    $('#checkin_electric_div').removeClass('has-error has-success');
+    $('#checkin_tenant_name_div').removeClass('has-error has-success');
+    $('.help-block').hide();
 
     if (waterMode === '1') {
         $('#checkin_water_div').hide();
@@ -152,6 +164,7 @@ function onChecninClick(roomName) {
     $('#checkin_apartment_floor')[0].value = roomObj.apartment_floor;
     $('#checkin_apartment_name')[0].value = roomObj.apartment_name;
     $('#checkin_apartment_apartment_id')[0].value = roomObj.apartment_id;
+    $('#checkin_user_name')[0].value = userName;
     $('#checkin').modal();
 
 }
@@ -236,7 +249,7 @@ function onCheckout(apartmentName) {
 
             $('#checkout_last_electrice_kwh')[0].value = lastElectric;
             $('#checkout_last_water_meter')[0].value = lastWater;
-            
+
             $('#checkout_network_fee')[0].value = netFee;
             $('#checkout_trash_fee')[0].value = trashFee;
 
@@ -259,7 +272,9 @@ function onCheckout(apartmentName) {
                 $('#checkout_total_other').html(parseInt(monthEletrFee, 10) + parseInt(waterFee, 10) + parseInt(netFee, 10) + parseInt(trashFee, 10));
             });
 
+
             $('#radio_month').click(function() {
+
                 $('#checkout_water_fee')[0].value = waterFee;
                 $('#checkout_water_fee_hidden')[0].value = waterFee;
                 $('#checkout_network_fee')[0].value = netFee;
@@ -273,12 +288,23 @@ function onCheckout(apartmentName) {
                 var netFeeDay = Math.round((parseInt(netFee, 10) / 30) * dayOfMonth);
                 var trashFeeDay = Math.round((parseInt(trashFee, 10) / 30) * dayOfMonth);
 
-                $('#checkout_water_fee')[0].value = waterFeeDay;
-                $('#checkout_water_fee_hidden')[0].value = waterFeeDay;
-                $('#checkout_network_fee')[0].value = netFeeDay;
-                $('#checkout_trash_fee')[0].value = trashFeeDay;
+                if (waterMode === '2') {
+                    $('#checkout_network_fee')[0].value = netFeeDay;
+                    $('#checkout_trash_fee')[0].value = trashFeeDay;
+                    $('#checkout_water_fee')[0].value = waterFee;
+                    $('#checkout_water_fee_hidden')[0].value = waterFee;
+                    $('#checkout_total_other').html(waterFee + netFeeDay + trashFeeDay + parseInt(monthEletrFee, 10));
 
-                $('#checkout_total_other').html(waterFeeDay + netFeeDay + trashFeeDay + parseInt(monthEletrFee, 10));
+                } else {
+                    $('#checkout_network_fee')[0].value = netFeeDay;
+                    $('#checkout_trash_fee')[0].value = trashFeeDay;
+                    $('#checkout_water_fee')[0].value = waterFeeDay;
+                    $('#checkout_water_fee_hidden')[0].value = waterFeeDay;
+                    $('#checkout_total_other').html(waterFeeDay + netFeeDay + trashFeeDay + parseInt(monthEletrFee, 10));
+
+                }
+
+
 
             });
 
@@ -346,8 +372,8 @@ function onChargeOtherFee(apartmentName) {
     var currentWaterMeterNode = $('#charge_other_current_water_meter');
     currentWaterMeterNode[0].value = "";
 
-                // var selectPermission = $('#modifyUserPermission');
-            // selectPermission.get(0).selectedIndex = (userPermissionOld - 1);
+    // var selectPermission = $('#modifyUserPermission');
+    // selectPermission.get(0).selectedIndex = (userPermissionOld - 1);
     var date = new Date();
     var monthSelect = $('#charge_other_fee_charge_month');
     monthSelect.get(0).selectedIndex = date.getMonth();
@@ -495,7 +521,7 @@ $(document).ready(function() {
     var monthReminderListNode = $('#month_remind_list');
     $.ajax({
         type: "POST",
-        url: "getall_TLT.action?domain_code="+domainCode,
+        url: "getall_TLT.action?domain_code=" + domainCode,
         success: function(data) {
             console.log(data);
             var objList = eval(data);
@@ -505,7 +531,7 @@ $(document).ready(function() {
     var contractRemindList = $('#contract_remind_list');
     $.ajax({
         type: "POST",
-        url: "getAll_CTL.action?domain_code="+domainCode,
+        url: "getAll_CTL.action?domain_code=" + domainCode,
         success: function(data) {
             console.log("++++++++++++++++++++++" + data);
             var objList = eval(data);
@@ -654,6 +680,37 @@ $(document).ready(function() {
 
     // setTimeout(window.location.reload(),3000);
     setTimeout('refreshPage()', 1000 * 60 * 60 * 12);
+
+    $("#checkin_form").validation({
+        reqmark: false,
+        icon: false
+    });
+
+    $("#checkinOK").on('click', function(event) {
+        var name = $('#checkin_tenant_name')[0].value;
+        var electricKwh = $('#checkin_apartment_electric_fee')[0].value;
+        var waterMeter = $('#checkin_apartment_water_meter')[0].value;
+        var startDate = $('#checkin_contract_start')[0].value;
+        var endDate = $('#checkin_contract_end')[0].value;
+        var freq = $('#checkin_contract_frequency_next')[0].value;
+
+        var isCheckPass = false;
+        if (waterMode === '1') {
+            isCheckPass = (name !== '') && (electricKwh !== '') && (startDate !== '') && (endDate !== '') && (freq !== null);
+        } else {
+            isCheckPass = (name !== '') && (electricKwh !== '') && (startDate !== '') && (endDate !== '') && (freq !== null) && (waterMeter !== '');
+        }
+
+        if (!isCheckPass) {
+            $('#checkin_alert_msg').show();
+        }
+
+
+        if ($("#checkin_form").valid('填写信息不完整') === false) {
+
+            return false;
+        }
+    });
 });
 
 

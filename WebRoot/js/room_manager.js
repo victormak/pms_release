@@ -149,14 +149,19 @@ $(document).ready(function() {
             // $('#modifyId').val(userOjb.id);
             // $('#modifyUserId').val(userOjb.user_id);
             // $('#modifyUser').modal();
-
+            var btnCheckInOK = $('#checkinOK');
+            btnCheckInOK.attr('disabled',"true");
             $('#checkin_alert_msg').hide();
-            $('#checkin_apartment_person_num')[0].value = "1";
+            var checkinPersonNum = $('#checkin_apartment_person_num');
+            checkinPersonNum[0].value = "1";
             $('#checkin_contract_start')[0].value = "";
             $('#checkin_contract_end')[0].value = "";
-            $('#checkin_contract_start_show')[0].value = "";
-            $('#checkin_contract_end_show')[0].value = "";
-            $('#checkin_contract_frequency_next_show')[0].value = "";
+            var checkinStart = $('#checkin_contract_start_show');
+            checkinStart[0].value = "";
+            var checkinEnd = $('#checkin_contract_end_show')
+            checkinEnd[0].value = "";
+            var checkinFreqNext = $('#checkin_contract_frequency_next_show');
+            checkinFreqNext[0].value = "";
             $('#checkin_contract_month_price')[0].value = "";
             $('#checkin_contract_deposit')[0].value = "";
             $('#checkin_contract_frequency')[0].value = "";
@@ -164,7 +169,8 @@ $(document).ready(function() {
             $('#checkin_total')[0].value = "";
             $('#checkin_apartment_owe')[0].value = "";
             $('#checkin_month_fee')[0].value = "";
-            $('#checkin_tenant_name')[0].value = "";
+            var checkinTenantName = $('#checkin_tenant_name');
+            checkinTenantName[0].value = "";
             $('#checkin_tenant_phonenumber')[0].value = "";
             $('#checkin_tenant_age')[0].value = "";
             $('#checkin_tenant_desc')[0].value = "";
@@ -183,13 +189,86 @@ $(document).ready(function() {
 
             var roomObj = row;
             // console.log(roomObj);
-            $('#checkin_apartment_electric_fee')[0].value = roomObj.apartment_electric_fee;
-            $('#checkin_apartment_water_meter')[0].value = roomObj.apartment_water_meter;
+            var checkinElect = $('#checkin_apartment_electric_fee');
+            checkinElect[0].value = roomObj.apartment_electric_fee;
+            var checkinWaterMeter = $('#checkin_apartment_water_meter');
+            checkinWaterMeter[0].value = roomObj.apartment_water_meter;
             $('#checkin_apartment_area')[0].value = domainCode;
             $('#checkin_apartment_floor')[0].value = roomObj.apartment_floor;
             $('#checkin_apartment_name')[0].value = roomObj.apartment_name;
             $('#checkin_apartment_apartment_id')[0].value = roomObj.apartment_id;
             $('#checkin_user_name')[0].value = userName;
+
+            function checkRequiredOk (perNum, start, end, freq, elect, waterMeter, waterMod, name) {
+                var perNumVal = perNum[0].value;
+                var startVal = start[0].value;
+                var endVal = end[0].value;
+                var freqVal = freq[0].value;
+                var electVal = elect[0].value;
+                var waterVal = waterMeter[0].value;
+                var nameVal = name[0].value;
+
+                var besideWater = (perNumVal !== '') && (startVal !== '') && (endVal !== '') && (freqVal !== '') && (electVal !== '') && (nameVal !== '');
+
+                if (waterMod === '1') {
+                    console.log(besideWater);
+                    return besideWater;
+                } else {
+                    var withWater = besideWater && (waterVal !== '');
+                    console.log(withWater);
+                    return withWater;
+                }
+            }
+
+            checkinPersonNum.change(function (){
+                if (checkRequiredOk(checkinPersonNum,checkinStart,checkinEnd,checkinFreqNext,checkinElect,checkinWaterMeter,waterMode,checkinTenantName)) {
+                    btnCheckInOK.removeAttr("disabled");
+                }else {
+                    btnCheckInOK.attr('disabled',"true");
+                }
+            });
+            checkinStart.change(function (){
+                if (checkRequiredOk(checkinPersonNum,checkinStart,checkinEnd,checkinFreqNext,checkinElect,checkinWaterMeter,waterMode,checkinTenantName)) {
+                    btnCheckInOK.removeAttr("disabled");
+                }else {
+                    btnCheckInOK.attr('disabled',"true");
+                }
+            });
+            checkinEnd.change(function (){
+                if (checkRequiredOk(checkinPersonNum,checkinStart,checkinEnd,checkinFreqNext,checkinElect,checkinWaterMeter,waterMode,checkinTenantName)) {
+                    btnCheckInOK.removeAttr("disabled");
+                }else {
+                    btnCheckInOK.attr('disabled',"true");
+                }
+            });
+            checkinFreqNext.change(function (){
+                if (checkRequiredOk(checkinPersonNum,checkinStart,checkinEnd,checkinFreqNext,checkinElect,checkinWaterMeter,waterMode,checkinTenantName)) {
+                    btnCheckInOK.removeAttr("disabled");
+                }else {
+                    btnCheckInOK.attr('disabled',"true");
+                }
+            });
+            checkinElect.change(function (){
+                if (checkRequiredOk(checkinPersonNum,checkinStart,checkinEnd,checkinFreqNext,checkinElect,checkinWaterMeter,waterMode,checkinTenantName)) {
+                    btnCheckInOK.removeAttr("disabled");
+                }else {
+                    btnCheckInOK.attr('disabled',"true");
+                }
+            });
+            checkinWaterMeter.change(function (){
+                if (checkRequiredOk(checkinPersonNum,checkinStart,checkinEnd,checkinFreqNext,checkinElect,checkinWaterMeter,waterMode,checkinTenantName)) {
+                    btnCheckInOK.removeAttr("disabled");
+                }else {
+                    btnCheckInOK.attr('disabled',"true");
+                }
+            });
+            checkinTenantName.change(function (){
+                if (checkRequiredOk(checkinPersonNum,checkinStart,checkinEnd,checkinFreqNext,checkinElect,checkinWaterMeter,waterMode,checkinTenantName)) {
+                    btnCheckInOK.removeAttr("disabled");
+                }else {
+                    btnCheckInOK.attr('disabled',"true");
+                }
+            });
 
             $('#checkin').modal();
         },
@@ -464,6 +543,8 @@ $(document).ready(function() {
         icon: false
     });
 
+
+
     $("#checkinOK").on('click', function(event) {
 
         var name = $('#checkin_tenant_name')[0].value;
@@ -484,7 +565,7 @@ $(document).ready(function() {
             $('#checkin_alert_msg').show();
         }
 
-
+        // $("#checkin_form").valid('填写信息不完整')
         if ($("#checkin_form").valid('填写信息不完整') === false) {
 
             return false;

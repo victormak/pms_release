@@ -191,7 +191,7 @@ $(document).ready(function() {
             $('#checkin_apartment_apartment_id')[0].value = roomObj.apartment_id;
             $('#checkin_user_name')[0].value = userName;
 
-            $('#testModal').modal();
+            $('#checkin').modal();
         },
         'click .modify': function(e, value, row, index) {
             // alert('You click checkin action, row: ' + JSON.stringify(row));
@@ -465,6 +465,7 @@ $(document).ready(function() {
     });
 
     $("#checkinOK").on('click', function(event) {
+
         var name = $('#checkin_tenant_name')[0].value;
         var electricKwh = $('#checkin_apartment_electric_fee')[0].value;
         var waterMeter = $('#checkin_apartment_water_meter')[0].value;
@@ -492,23 +493,23 @@ $(document).ready(function() {
 
     });
 
-    $("#okbtn").on('click', function(event) {
-        alert("shit");
-        return true;
-    });
+    // $("#okbtn").on('click', function(event) {
+    //     alert("shit");
+    //     return true;
+    // });
 
-    $("#form3").validation(function(obj, params) {
-        //扩展校验方法
-    }, { reqmark: false, icon: false });
-    //.注册
-    $("#submit3").on('click', function(event) {
-        // 2.最后要调用 valid()方法。
-        if ($("#form3").valid('填写信息不完整。') === false) {
-            alert('填写信息不完整。');
-            console.log('填写信息不完整。')
-            return false;
-        }
-    });
+    // $("#form3").validation(function(obj, params) {
+    //     //扩展校验方法
+    // }, { reqmark: false, icon: false });
+    // //.注册
+    // $("#submit3").on('click', function(event) {
+    //     // 2.最后要调用 valid()方法。
+    //     if ($("#form3").valid('填写信息不完整。') === false) {
+    //         alert('填写信息不完整。');
+    //         console.log('填写信息不完整。')
+    //         return false;
+    //     }
+    // });
 
     $.ajax({
         type: "POST",

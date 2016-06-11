@@ -5,7 +5,7 @@ var smsSwitcherValue;
 var smsSwitcherNodeValue;
 var waterMode;
 
-function generateOneRoomCard(parentNode, apartmentName, tenantName, tenantTel, apartmentState, otherRemindFlag) {
+function generateOneRoomCard(parentNode, apartmentName, tenantName, tenantTel, freq, apartmentState, otherRemindFlag) {
 
     var apartmentStateArray = apartmentState.split(",");
     //console.log(apartmentStateArray);
@@ -19,11 +19,13 @@ function generateOneRoomCard(parentNode, apartmentName, tenantName, tenantTel, a
     var rentBtnNode = $('<button class="btn btn-xs btn-warning" name="' + apartmentName + '" id="rent' + apartmentName + '" onclick="onChargeRent(this.name)">月租</button>');
     var oweBtnNode = $('<button class="btn btn-xs btn-info" name="' + apartmentName + '" id="own' + apartmentName + '" onclick="onChargeOwe(this.name)">交欠费</button>');
     var checkoutBtnNode = $('<button class="btn btn-danger btn-xs" name="' + apartmentName + '" id="own' + apartmentName + '" onclick="onCheckout(this.name)">退房</button >');
-    var panelBodyNode = $('<div class="panel-body clearfix clear" style="font-size: 15px; height:70px;"></div>');
+    var panelBodyNode = $('<div class="panel-body clearfix clear" style="font-size: 15px; height:85px;"></div>');
     var nameDivNode = $('<div></div>');
     var nameSpanNode = $('<span>' + tenantName + '</span>');
     var telDivNode = $('<div></div>');
     var telSpanNode = $('<span>' + tenantTel + '</span>');
+    var freqDivNode = $('<div></div>');
+    var freqSpanNode = $('<span style="font-size: 14px; color: #999;">周期到期：' + freq + '</span>');
     var footerNode = $('<footer class="panel-footer"></footer>');
     var labelVoidNode = $('<label class="label btn-default btn-xs"">未出租</label>');
     var labelNormalNode = $('<label class="label bg-success m-l-xs">正常</label>');
@@ -50,6 +52,8 @@ function generateOneRoomCard(parentNode, apartmentName, tenantName, tenantTel, a
     nameSpanNode.appendTo(nameDivNode);
     telDivNode.appendTo(panelBodyNode);
     telSpanNode.appendTo(telDivNode);
+    freqDivNode.appendTo(panelBodyNode);
+    freqSpanNode.appendTo(freqDivNode);
     footerNode.appendTo(panelSectionNode);
 
     // for (var i = 0; i < apartmentStateArray.length; i++) {
@@ -192,6 +196,11 @@ function onCheckout(apartmentName) {
     var monthEletrFee;
     var everyKwhFee;
 
+    $('#info_checkout_name').html(roomObj.tenant_name);
+    $('#info_checkout_next_freq').html(roomObj.apartment_nextcharge_point);
+    $('#info_checkout_month_fee').html(roomObj.contract_month_price + '元');
+    $('#info_checkout_contract').html(roomObj.contract_endtime);
+
     $('#checkOutModalRoomName').html(apartmentName);
 
     $.ajax({
@@ -331,6 +340,11 @@ function onChargeRent(apartmentName) {
         ownFeeNode[0].value = rentExpected - parseInt(actualFeeNode[0].value, 10);
     });
 
+    $('#info_rent_name').html(roomObj.tenant_name);
+    $('#info_rent_next_freq').html(roomObj.apartment_nextcharge_point);
+    $('#info_rent_month_fee').html(roomObj.contract_month_price + '元');
+    $('#info_rent_contract').html(roomObj.contract_endtime);
+
     $('#charge_month_expected')[0].value = rentExpected;
 
     $('#charge_month_apartment_id')[0].value = roomObj.apartment_id;
@@ -392,6 +406,11 @@ function onChargeOtherFee(apartmentName) {
     var trashFee;
     var monthEletrFee;
     var everyKwhFee;
+
+    $('#info_name').html(roomObj.tenant_name);
+    $('#info_next_freq').html(roomObj.apartment_nextcharge_point);
+    $('#info_month_fee').html(roomObj.contract_month_price + '元');
+    $('#info_contract').html(roomObj.contract_endtime);
 
     $('#already_charged_other_fee_month').html(roomObj.apartment_create_other_month);
 
@@ -618,6 +637,7 @@ $(document).ready(function() {
                     dataObjs[i].apartment_name,
                     dataObjs[i].tenant_name,
                     dataObjs[i].tenant_phonenumber,
+                    dataObjs[i].apartment_nextcharge_point,
                     dataObjs[i].apartment_status,
                     dataObjs[i].apartment_other_remind);
             }
@@ -678,8 +698,7 @@ $(document).ready(function() {
         }
     });
 
-    // setTimeout(window.location.reload(),3000);
-    setTimeout('refreshPage()', 1000 * 60 * 60 * 12);
+    setInterval('refreshPage()', 1000 * 60 * 60 * 12);
 
     $("#checkin_form").validation({
         reqmark: false,
@@ -711,8 +730,21 @@ $(document).ready(function() {
             return false;
         }
     });
+
+
+
+    setInterval('changeTime()', 1000);
+
+
 });
 
+function changeTime() {
+
+    var dateSpanNode = $('#title_current_date');
+    var currentDate = new Date();
+    var currentDateStr = currentDate.toLocaleString();
+    dateSpanNode.html(currentDateStr);
+}
 
 function refreshPage() {
     window.location.reload();

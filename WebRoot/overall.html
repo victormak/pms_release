@@ -131,6 +131,7 @@
             <section class="vbox">
                 <header class="header bg-white b-b">
                     <p>房间一览</p>
+                    <span id="title_current_date" class="pull-right text-success" style="font-size: 15px; padding-top: 20px; margin-right: 10px; font-weight:bold"></span>
                 </header>
                 <div class="row" style="margin-top: 10px; margin-right: 2px;">
                     <div class="col-lg-9 scrollable" id="all_room">
@@ -400,6 +401,24 @@
                     <span id="chargeOtherModalRoomName"></span>
                     </h4>
                 </div>
+                <div class="panel" style="margin-top: 15px; margin-left: 20px; margin-right: 20px; padding: 10px">
+                    <div class="row" style="margin-top: 5px">
+                        <span class="col-md-3" style="font-size: 14px">姓名：</span>
+                        <span class="col-md-4" id="info_name" style="font-size: 14px"></span>
+                    </div>
+                    <div class="row" style="margin-top: 5px">
+                        <span class="col-md-3" style="font-size: 14px">周期结束日期：</span>
+                        <span class="col-md-4" id="info_next_freq" style="font-size: 14px"></span>
+                    </div>
+                    <div class="row" style="display:none">
+                        <span class="col-md-3" style="font-size: 14px">月租金额：</span>
+                        <span class="col-md-4" id="info_month_fee" style="font-size: 14px"></span>
+                    </div>
+                    <div class="row" style="margin-top: 5px">
+                        <span class="col-md-3" style="font-size: 14px">合同结束日期：</span>
+                        <span class="col-md-4" id="info_contract" style="font-size: 14px"></span>
+                    </div>
+                </div>
                 <form id="charge_other_fee_form" action="charge_other_fee.action" class="form-horizontal" role="form" method="post">
                     <div class="modal-body">
                         <div class="panel ">
@@ -475,12 +494,12 @@
                                         <option value="4">4</option>
                                         <option value="5">5</option>
                                         <option value="6">6</option>
-                                        <option value="7">7</options> 
-                                        <option value="8">8</option>
-                                        <option value="9">9</option>
-                                        <option value="10">10</option>
-                                        <option value="11">11</option>
-                                        <option value="12">12</option>
+                                        <option value="7">7</options>
+                                            <option value="8">8</option>
+                                            <option value="9">9</option>
+                                            <option value="10">10</option>
+                                            <option value="11">11</option>
+                                            <option value="12">12</option>
                                     </select>
                                 </div>
                             </div>
@@ -511,16 +530,34 @@
     </div>
     <div class="modal fade" id="charge_month_fee_modal" tabindex="-1" role="dialog" aria-labelledby="overallModalTitleWithRoomName">
         <div class="modal-dialog" role="document">
-            <div class="modal-content" style="width:700px;">
+            <div class="modal-content" style="width:400px;">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                     <h4 class="modal-title text-primary" id="overallModalTitleWithRoomName">收租 - 
                         <span id="chargeMonthModalRoomName"></span>
                     </h4>
                 </div>
+                <div class="panel" style="margin-top: 15px; margin-left: 20px; margin-right: 20px; padding: 10px">
+                    <div class="row" style="margin-top: 5px">
+                        <span class="col-md-5" style="font-size: 14px">姓名：</span>
+                        <span class="col-md-4" id="info_rent_name" style="font-size: 14px"></span>
+                    </div>
+                    <div class="row" style="margin-top: 5px">
+                        <span class="col-md-5" style="font-size: 14px">周期结束日期：</span>
+                        <span class="col-md-4" id="info_rent_next_freq" style="font-size: 14px"></span>
+                    </div>
+                    <div class="row" style="margin-top: 5px">
+                        <span class="col-md-5" style="font-size: 14px">月租金额：</span>
+                        <span class="col-md-4" id="info_rent_month_fee" style="font-size: 14px"></span>
+                    </div>
+                    <div class="row" style="margin-top: 5px">
+                        <span class="col-md-5" style="font-size: 14px">合同结束日期：</span>
+                        <span class="col-md-4" id="info_rent_contract" style="font-size: 14px"></span>
+                    </div>
+                </div>
                 <form id="charge_month_fee_form" action="charge_month_fee.action" class="form-horizontal" role="form" method="post">
                     <div class="modal-body">
-                        <div class="panel ">
+                        <div class="panel " style="padding-bottom: 10px;">
                             <div class="form-group row rowMarginTop modalPanel">
                                 <div style="display:none">
                                     <label class="col-md-2 control-label">应收</label>
@@ -529,23 +566,25 @@
                                     </div>
                                 </div>
                                 <label for="charge_month_fee_contract_frequency" class="col-md-2 control-label">周期</label>
-                                <div class="input-group date form_date col-md-4" data-date="" data-date-format="yyyy-mm-dd" data-link-field="charge_month_fee_contract_frequency" data-link-format="yyyy-mm-dd">
+                                <div class="input-group date form_date col-md-8" data-date="" data-date-format="yyyy-mm-dd" data-link-field="charge_month_fee_contract_frequency" data-link-format="yyyy-mm-dd">
                                     <input class="form-control" size="16" type="text" value="" readonly>
                                     <span class="input-group-addon">
                                                 <span class="glyphicon glyphicon-calendar"></span>
                                     </span>
                                 </div>
                                 <input name="apartment.apartment_nextcharge_point" type="hidden" id="charge_month_fee_contract_frequency" />
-                                <div>
-                                    <label class="col-md-2 control-label">实收</label>
-                                    <div class="col-md-2">
-                                        <input name="feehistory.month_fee" class="form-control" id="charge_month_actual" type="number" min="0">
-                                    </div>
-                                </div>
                                 <div style="display:none">
                                     <label class="col-md-2 control-label">欠费</label>
                                     <div class="col-md-2">
                                         <input name="apartment.apartment_owe" class="form-control" id="charge_month_owe" type="number" min="0" readonly>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div>
+                                    <label class="col-md-2 control-label">实收</label>
+                                    <div class="col-md-8">
+                                        <input name="feehistory.month_fee" class="form-control" id="charge_month_actual" type="number" min="0">
                                     </div>
                                 </div>
                             </div>
@@ -619,6 +658,24 @@
                     <h4 class="modal-title text-primary" id="overallModalTitleWithRoomName">退房 - 
                     <span id="checkOutModalRoomName"></span>
                 </h4>
+                </div>
+                <div class="panel" style="margin-top: 15px; margin-left: 20px; margin-right: 20px; padding: 10px">
+                    <div class="row" style="margin-top: 5px">
+                        <span class="col-md-3" style="font-size: 14px">姓名：</span>
+                        <span class="col-md-4" id="info_checkout_name" style="font-size: 14px"></span>
+                    </div>
+                    <div class="row" style="display:none">
+                        <span class="col-md-3" style="font-size: 14px">周期结束日期：</span>
+                        <span class="col-md-4" id="info_checkout_next_freq" style="font-size: 14px"></span>
+                    </div>
+                    <div class="row" style="margin-top: 5px">
+                        <span class="col-md-3" style="font-size: 14px">月租金额：</span>
+                        <span class="col-md-4" id="info_checkout_month_fee" style="font-size: 14px"></span>
+                    </div>
+                    <div class="row" style="margin-top: 5px">
+                        <span class="col-md-3" style="font-size: 14px">合同结束日期：</span>
+                        <span class="col-md-4" id="info_checkout_contract" style="font-size: 14px"></span>
+                    </div>
                 </div>
                 <form id="checkout_form" action="check_out.action" class="form-horizontal" role="form" method="post">
                     <div class="modal-body">

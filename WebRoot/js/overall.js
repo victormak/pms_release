@@ -81,7 +81,6 @@ function generateOneRoomCard(parentNode, apartmentName, tenantName, tenantTel, a
             checkoutBtnNode.appendTo(btnDivNode);
             break;
         case "802":
-            rentBtnNode.appendTo(btnDivNode);
             btnDivNode.appendTo(headerNode);
             labelContractNode.appendTo(footerNode);
             if (otherRemindFlag === 1) {
@@ -347,6 +346,12 @@ function onChargeOtherFee(apartmentName) {
     var currentWaterMeterNode = $('#charge_other_current_water_meter');
     currentWaterMeterNode[0].value = "";
 
+                // var selectPermission = $('#modifyUserPermission');
+            // selectPermission.get(0).selectedIndex = (userPermissionOld - 1);
+    var date = new Date();
+    var monthSelect = $('#charge_other_fee_charge_month');
+    monthSelect.get(0).selectedIndex = date.getMonth();
+
     $('#chargeOtherModalRoomName').html(apartmentName);
 
     var roomObj = findDataByRoomName(dataObjs, apartmentName);
@@ -361,6 +366,9 @@ function onChargeOtherFee(apartmentName) {
     var trashFee;
     var monthEletrFee;
     var everyKwhFee;
+
+    $('#already_charged_other_fee_month').html(roomObj.apartment_create_other_month);
+
     $.ajax({
         url: "getFeeItemAll.action",
         dataType: "json",

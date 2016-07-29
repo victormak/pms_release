@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>物业管理系统</title>
+    <meta name="description" content="mis">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" href="css/app.v1.css">
+    <link rel="stylesheet" href="css/font.css" cache="false">
+    <!--[if lt IE 9]>
+    <script src="js/ie/respond.min.js" cache="false"></script>
+    <script src="js/ie/html5.js" cache="false"></script>
+    <script src="js/ie/fix.js" cache="false"></script> <![endif]-->
+
+</head>
+
+<body>
+    <section class="hbox stretch">
+        <!-- .aside -->
+        <aside class="bg-dark aside-sm" id="nav">
+            <section class="vbox">
+                <header class="dker nav-bar">
+                    <a href="#" class="nav-brand" data-toggle="fullscreen" id="navi_domain"></a>
+                    <a class="btn btn-link visible-xs" data-toggle="class:show" data-target=".nav-user">
+                        <i class="icon-comment-alt"></i>
+                    </a>
+                </header>
+                <footer class="footer bg-gradient hidden-xs">
+                    <a href="login.html"   class="btn btn-sm btn-link m-r-n-xs pull-right">
+                        <i class="icon-off"></i>
+                    </a>
+                </footer>
+                <section>
+                    <!-- user -->
+                    <div class="bg-success nav-user hidden-xs pos-rlt">
+                        <div class="nav-avatar pos-rlt">
+                            <a href="#" class="thumb-sm avatar animated rollIn" data-toggle="dropdown">
+                                <img src="images/avatar.jpg" alt="" class="">
+                                <span class="caret caret-white"></span>
+                            </a>
+                            <ul class="dropdown-menu m-t-sm animated fadeInLeft">
+                                <span class="arrow top"></span>
+                                <li><a href="login.html">logout</a></li>
+                            </ul>
+                        </div>
+                        <div class="nav-msg">
+                            <a class="dropdown-toggle" data-toggle="dropdown">
+                                <b class="badge badge-white count-n" id="navi_user_name"></b>
+                            </a>
+                        </div>
+                    </div>
+                    <!-- / user -->
+                    <!-- nav -->
+                    <nav class="nav-primary hidden-xs">
+                        <ul class="nav">
+                            <li>
+                                <a href="overall.html">
+                                    <i class="icon-home"></i>
+                                    <span>房间一览</span>
+                                </a>
+                            </li>
+                            <li >
+                                <a href="room_manager.html">
+                                    <!-- <b class="badge bg-primary pull-right">3</b>  -->
+                                    <i class="icon-building"></i>
+                                    <span>房间管理</span>
+                                </a>
+                            </li>
+                            <li id="domain_menu_item" style="display:none">
+                                <a href="domain_manager.html">
+                                    <i class="icon-sitemap"></i>
+                                    <span>物业管理</span>
+                                </a>
+                            </li>
+                            <li>
+                                <!-- <a href="#" class="dropdown-toggle" data-toggle="dropdown"> -->
+                                <a href="record.html">
+                                    <i class="icon-tasks"></i>
+                                    <span>收费历史</span>
+                                </a>
+                            </li>
+                            <li class="active">
+                                <a href="#">
+                                    <!-- <b class="badge bg-primary pull-right">3</b>  -->
+                                    <i class="icon-book"></i>
+                                    <span>设&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp置</span>
+                                </a>
+                            </li>
+                            <li id="user_menu_item" style="display:none">
+                                <a href="user_manager.html">
+                                    <!-- <b class="badge bg-primary pull-right">3</b>  -->
+                                    <i class="icon-group"></i>
+                                    <span>用户管理</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </nav>
+                    <!-- / nav -->
+                    <!-- note -->
+                    <!-- <div class="bg-danger wrapper hidden-vertical animated rollIn text-sm">
+                            <a href="#" data-dismiss="alert" class="pull-right m-r-n-sm m-t-n-sm"><i class="icon-close icon-remove "></i></a>
+                            Hi, this is welcome msg.
+                        </div> -->
+                    <!-- / note -->
+                </section>
+            </section>
+        </aside>
+        <!-- /.aside -->
+        <!-- .vbox -->
+        <section id="content">
+            <section class="vbox">
+                <header class="header bg-white b-b">
+                    <p class="h4 block">收费与提醒设置</p>
+                </header>
+                <section class="scrollable wrapper">
+                    <!--     <section class="panel">
+                        <div class="panel-body">
+                            <div class="clear clearfix m-b"><a class="h4"><strong>Every</strong></a>
+
+                            </div>
+                        </div>
+                    </section> -->
+                    <section class="panel">
+                        <header class="panel-heading h4">每月杂费收费项目明细</header>
+                        <section class="panel-body">
+                            <div class="media">
+                                <div class="pull-left thumb-sm">
+                                    <span class="icon-stack"> 
+                                        <i class="icon-circle icon-stack-base"></i> 
+                                        <i class="icon-desktop icon-light"></i> 
+                                    </span>
+                                </div>
+                                <div class="media-body">
+                                    <span class="text-muted h5">网费</span>
+                                    <div class="row">
+                                        <div class="col-md-9">
+                                            <span id="sp_display_network_fee" class="h3 block"></span>
+                                        </div>
+                                        <div class="col-md-1 text-muted" id="btn_mod_network" onclick="onClickModify(this.id, 'div_et_network', 'ip_network_fee', 'sp_display_network_fee')">
+                                            <a href="#" class="btn btn-white btn-md">
+                                                <i class="icon-pencil text-muted"></i> 修改
+                                            </a>
+                                        </div>
+                                        <div class="col-md-3" style="display:none" id="div_et_network">
+                                            <div class="input-group ">
+                                                <input id="ip_network_fee" type="number" min="0" step="0.1" class="form-control" placeholder="edit">
+                                                
+                                                <span class="btn btn-white btn-xs input-group-addon" id="btn_network_ok" onclick="onClickOk('btn_mod_network','div_et_network','ip_network_fee','sp_display_network_fee')" >
+                                                    <i class="icon-ok text-success"></i>
+                                                </span>
+                                                <span class="btn btn-white btn-xs input-group-addon" id="btn_network_close" onclick="onClickClose('btn_mod_network','div_et_network')">
+                                                    <i class="icon-remove text-danger" ></i>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="line pull-in"></div>
+                            <div class="media">
+                                <div class="pull-left thumb-sm">
+                                    <span class="icon-stack"> 
+                                        <i class="icon-circle icon-stack-base"></i> 
+                                        <i class="icon-trash icon-light"></i> 
+                                    </span>
+                                </div>
+                                <div class="media-body">
+                                    <span class="text-muted h5">垃圾费</span>
+                                    <div class="row">
+                                        <div class="col-md-9">
+                                            <span id="sp_display_trash_fee" class="h3 block"></span>
+                                        </div>
+                                        <div class="col-md-1 text-muted" id="btn_mod_trash" onclick="onClickModify(this.id,'div_et_trash','ip_trash_fee','sp_display_trash_fee')">
+                                            <a href="#" class="btn btn-white btn-md">
+                                                <i class="icon-pencil text-muted"></i> 修改
+                                            </a>
+                                        </div>
+                                        <div class="col-md-3" style="display:none" id="div_et_trash">
+                                            <div class="input-group">
+                                                <input id="ip_trash_fee" type="number" min="0" step="0.1" class="form-control" placeholder="edit">
+                                                <span class="btn btn-white btn-xs input-group-addon"  id="btn_trash_ok" onclick="onClickOk('btn_mod_trash','div_et_trash','ip_trash_fee','sp_display_trash_fee')">
+                                                    <i class="icon-ok text-success"></i>
+                                                </span>
+                                                <span class="btn btn-white btn-xs input-group-addon" id="btn_trash_close" onclick="onClickClose('btn_mod_trash','div_et_trash')">
+                                                    <i class="icon-remove text-danger"></i>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="line pull-in"></div>
+                            <div class="media">
+                                <div class="pull-left thumb-sm">
+                                    <span class="icon-stack"> 
+                                        <i class="icon-circle icon-stack-base"></i> 
+                                        <i class="icon-tint icon-light"></i> 
+                                    </span>
+                                </div>
+                                <div class="media-body">
+                                    <span class="text-muted h5" >水费</span>
+                                    <div class="row">
+                                        <span class="col-md-2 h4">单人收费</span>
+                                        <span id="sp_display_water_single_fee" class="col-md-7 h3 block"></span>
+                                        <div class="col-md-1 text-muted" id="btn_mod_water_single" onclick="onClickModify(this.id, 'div_et_water_single','ip_water_single_fee','sp_display_water_single_fee')">
+                                            <a href="#" class="btn btn-white btn-md">
+                                                <i class="icon-pencil text-muted"></i> 修改
+                                            </a>
+                                        </div>
+                                        <div class="col-md-3"style="display:none" id="div_et_water_single">
+                                            <div class="input-group">
+                                                <input id="ip_water_single_fee" type="number" min="0" step="0.1" class="form-control" placeholder="edit">
+                                                <span class="btn btn-white btn-xs input-group-addon" id="btn_water_single_ok" onclick="onClickOk('btn_mod_water_single','div_et_water_single','ip_water_single_fee','sp_display_water_single_fee')">
+                                                    <i class="icon-ok text-success"></i>
+                                                </span>
+                                                <span class="btn btn-white btn-xs input-group-addon" id="btn_water_single_close" onclick="onClickClose('btn_mod_water_single','div_et_water_single')">
+                                                    <i class="icon-remove text-danger"></i>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="line pull-in"></div>
+                                    <div class="row">
+                                        <span class="col-md-2 h4">多人每人收费</span>
+                                        <span id="sp_display_water_multi_fee" class="col-md-7 h3 block"></span>
+                                        <div class="col-md-1 text-muted" id="btn_mod_water_multi" onclick="onClickModify(this.id, 'div_et_water_multi','ip_water_multi_fee','sp_display_water_multi_fee')">
+                                            <a href="#" class="btn btn-white btn-md">
+                                                <i class="icon-pencil text-muted"></i> 修改
+                                            </a>
+                                        </div>
+                                        <div class="col-md-3"style="display:none" id="div_et_water_multi">
+                                            <div class="input-group">
+                                                <input id="ip_water_multi_fee" type="number" min="0" step="0.1" class="form-control" placeholder="edit">
+                                                <span class="btn btn-white btn-xs input-group-addon" id="btn_network_ok" onclick="onClickOk('btn_mod_water_multi','div_et_water_multi','ip_water_multi_fee','sp_display_water_multi_fee')">
+                                                    <i class="icon-ok text-success"></i>
+                                                </span>
+                                                <span class="btn btn-white btn-xs input-group-addon" id="btn_water_multi_close" onclick="onClickClose('btn_mod_water_multi','div_et_water_multi')">
+                                                    <i class="icon-remove text-danger"></i>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="line pull-in"></div>
+                                    <div class="row">
+                                        <span class="col-md-2 h4">水表收费(元/吨)</span>
+                                        <span id="sp_display_water_cube_fee" class="col-md-7 h3 block"></span>
+                                        <div class="col-md-1 text-muted" id="btn_mod_water_cube" onclick="onClickModify(this.id, 'div_et_water_cube','ip_water_cube_fee','sp_display_water_cube_fee')">
+                                            <a href="#" class="btn btn-white btn-md">
+                                                <i class="icon-pencil text-muted"></i> 修改
+                                            </a>
+                                        </div>
+                                        <div class="col-md-3"style="display:none" id="div_et_water_cube">
+                                            <div class="input-group">
+                                                <input id="ip_water_cube_fee" type="number" min="0" step="0.1" class="form-control" placeholder="edit">
+                                                <span class="btn btn-white btn-xs input-group-addon" id="btn_network_ok" onclick="onClickOk('btn_mod_water_cube','div_et_water_cube','ip_water_cube_fee','sp_display_water_cube_fee')">
+                                                    <i class="icon-ok text-success"></i>
+                                                </span>
+                                                <span class="btn btn-white btn-xs input-group-addon" id="btn_water_cube_close" onclick="onClickClose('btn_mod_water_cube','div_et_water_cube')">
+                                                    <i class="icon-remove text-danger"></i>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="line pull-in"></div>
+                            <div class="media">
+                                <div class="pull-left thumb-sm">
+                                    <span class="icon-stack"> 
+                                        <i class="icon-circle icon-stack-base"></i> 
+                                        <i class="icon-bolt icon-light"></i> 
+                                    </span>
+                                </div>
+                                <div class="media-body">
+                                    <span class="text-muted h5">电费（单位：元/Kwh）</span>
+                                    <div class="row">
+                                        <div class="col-md-9">
+                                            <span id="sp_display_electric_fee" class="h3 block"></span>
+                                        </div>
+                                        <div class="col-md-1 text-muted" id="btn_mod_electric" onclick="onClickModify(this.id, 'div_et_electric','ip_electric_fee','sp_display_electric_fee')">
+                                            <a href="#" class="btn btn-white btn-md">
+                                                <i class="icon-pencil text-muted"></i> 修改
+                                            </a>
+                                        </div>
+                                        <div class="col-md-3"style="display:none" id="div_et_electric">
+                                            <div class="input-group">
+                                                <input id="ip_electric_fee" type="number" min="0" step="0.1" class="form-control " placeholder="edit">
+                                                <span class="btn btn-white btn-xs input-group-addon" id="btn_electric_ok" onclick="onClickOk('btn_mod_electric','div_et_electric','ip_electric_fee','sp_display_electric_fee')">
+                                                    <i class="icon-ok text-success"></i>
+                                                </span>
+                                                <span class="btn btn-white btn-xs input-group-addon" id="btn_electric_close" onclick="onClickClose('btn_mod_electric','div_et_electric')">
+                                                    <i class="icon-remove text-danger"></i>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+                    </section>
+                    <section class="panel">
+                        <header class="panel-heading h4">时间提醒</header>
+                        <section class="panel-body">
+                            <div class="media">
+                                <div class="pull-left thumb-sm">
+                                    <span class="icon-stack"> 
+                                        <i class="icon-circle icon-stack-base"></i> 
+                                        <i class="icon-calendar icon-light"></i> 
+                                    </span>
+                                </div>
+                                <div class="media-body">
+                                    <span class="text-muted h5">交租提醒天数</span>
+                                    <div class="row">
+                                        <div class="col-md-9">
+                                            <span id="sp_display_remain_month_days" class="h3 block"></span>
+                                        </div>
+                                        <div class="col-md-1 text-muted" id="btn_mod_remain_month_days" onclick="onClickModify(this.id, 'div_et_remain_month_days','ip_remain_month_days','sp_display_remain_month_days')">
+                                            <a href="#" class="btn btn-white btn-md">
+                                                <i class="icon-pencil text-muted"></i> 修改
+                                            </a>
+                                        </div>
+                                        <div class="col-md-3"style="display:none" id="div_et_remain_month_days">
+                                            <div class="input-group">
+                                                <input id="ip_remain_month_days" type="number" min="0" class="form-control" placeholder="edit">
+                                                <span class="btn btn-white btn-xs input-group-addon" id="btn_network_ok" onclick="onClickOk('btn_mod_remain_month_days','div_et_remain_month_days','ip_remain_month_days','sp_display_remain_month_days')">
+                                                    <i class="icon-ok text-success"></i>
+                                                </span>
+                                                <span class="btn btn-white btn-xs input-group-addon" id="btn_remain_month_days_close" onclick="onClickClose('btn_mod_remain_month_days','div_et_remain_month_days')">
+                                                    <i class="icon-remove text-danger"></i>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="line pull-in"></div>
+                            <div class="media">
+                                <div class="pull-left thumb-sm">
+                                    <span class="icon-stack"> 
+                                        <i class="icon-circle icon-stack-base"></i> 
+                                        <i class="icon-file icon-light"></i> 
+                                    </span>
+                                </div>
+                                <div class="media-body">
+                                    <span class="text-muted h5">合同到期提醒天数</span>
+                                    <div class="row">
+                                        <div class="col-md-9">
+                                            <span id="sp_display_remain_contract_days" class="h3 block"></span>
+                                        </div>
+                                        <div class="col-md-1 text-muted" id="btn_mod_remain_contract_days" onclick="onClickModify(this.id, 'div_et_remain_contract_days','ip_remain_contract_days','sp_display_remain_contract_days')">
+                                            <a href="#" class="btn btn-white btn-md">
+                                                <i class="icon-pencil text-muted"></i> 修改
+                                            </a>
+                                        </div>
+                                        <div class="col-md-3"style="display:none" id="div_et_remain_contract_days">
+                                            <div class="input-group">
+                                                <input id="ip_remain_contract_days" type="number" min="0" class="form-control" placeholder="edit">
+                                                <span class="btn btn-white btn-xs input-group-addon" id="btn_network_ok" onclick="onClickOk('btn_mod_remain_contract_days','div_et_remain_contract_days','ip_remain_contract_days','sp_display_remain_contract_days')">
+                                                    <i class="icon-ok text-success"></i>
+                                                </span>
+                                                <span class="btn btn-white btn-xs input-group-addon" id="btn_remain_contr_close" onclick="onClickClose('btn_mod_remain_contract_days','div_et_remain_contract_days')">
+                                                    <i class="icon-remove text-danger"></i>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+                    </section>
+                </section>
+            </section>
+            <a href="#" class="hide nav-off-screen-block" data-toggle="class:nav-off-screen" data-target="body"></a>
+        </section>
+        <!-- /.vbox -->
+    </section>
+    <script src="css/app.v1.js"></script>
+    <script src="js/settings.js"></script>
+    <script src="js/jquery.cookie.js"></script>
+    <!-- Bootstrap -->
+    <!-- Sparkline Chart -->
+    <!-- App -->
+</body>
+
+</html>

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+	<class name="com.pms.entity.ApartmentEntity" table="apartment">
+		<id name="id" type="java.lang.Integer" column="id">
+			<generator class="increment"></generator>
+		</id>
+		<property name ="apartment_id" type="java.lang.Integer" column="apartment_id" ></property>
+		<property name="apartment_name" type="string" column="apartment_name" length="20"></property>
+		<property name="apartment_electric_fee" type="string" column="apartment_electric_fee" length="20"></property>
+		<property name="apartment_desc" type="string" column="apartment_desc" length="500"></property>
+		<property name="apartment_floor" type="java.lang.Integer" column="apartment_floor" length="10"></property>
+		<property name="apartment_status" type="string" column="apartment_status" length="50"></property>
+		<property name="apartment_person_num" type="java.lang.Integer" column="apartment_person_num" length="10"></property>
+		<property name="apartment_owe" type="java.lang.Integer" column="apartment_owe" length="10"></property>
+		<property name="apartment_other_remind" type="java.lang.Integer" column="apartment_other_remind" length="10"></property>
+		<property name="apartment_create_other_month" type="java.lang.Integer" column="apartment_create_other_month" length="10"></property>
+		<property name="apartment_water_meter" type="string" column="apartment_water_meter" length="10"></property>
+		<property name="apartment_nextcharge_point" type="string" column="apartment_nextcharge_point" length="20"></property>
+	</class>
+</hibernate-mapping>

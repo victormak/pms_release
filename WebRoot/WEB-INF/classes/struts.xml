@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+    "http://struts.apache.org/dtds/struts-2.0.dtd">
+
+<struts>
+	<constant name="struts.action.extension" value="action,jsp" />  
+	<package name="user" extends="struts-default">
+	 	
+	 	<default-action-ref name="pagenotfound"></default-action-ref>  
+		   <action name="pagenotfound">  
+		              <result>/404.html</result>  
+		   </action>
+	 	
+	 	
+		<action name="sigin" class="com.pms.action.UserAction" method="sigin">
+			<result name="overall">/overall.html</result>
+			<result name="room_man">/room_manager.html</result>
+			<result name="false">/login.html</result>
+		</action>
+	 	<action name="getFeeItemAll" class ="com.pms.action.FeeItemAction" method ="getFeeItemAll"></action>
+	 	<action name="modifyFeeItem" class ="com.pms.action.FeeItemAction" method ="modifyFeeItem"></action>
+	 	
+	 	<action name ="getAllUsers" class="com.pms.action.UserAction" method ="getAllUsers"></action>
+	 	<action name="cerateSyetemUser" class ="com.pms.action.UserAction" method ="cerateSyetemUser"></action>
+	 	<action name="deleteSystemUserByUserId" class="com.pms.action.UserAction" method="deleteSystemUserByUserId"></action>
+	 	<action name="modifySystemUser" class="com.pms.action.UserAction" method="modifySystemUser"></action>
+	 	<action name="getSystemUserById" class="com.pms.action.UserAction" method ="getSystemUserById"></action>
+	 	<action name="deleteUserByIds" class="com.pms.action.UserAction" method ="deleteUserByIds"></action>
+	 	<action name="getAllDomain" class="com.pms.action.UserAction" method ="getAllDomain"></action>
+	 	<action name="createDomain" class="com.pms.action.UserAction" method ="createDomain"></action>
+	 	<action name="deleteDomain" class="com.pms.action.UserAction" method ="deleteDomain"></action>
+	 	<action name="modifyDomain" class="com.pms.action.UserAction" method ="modifyDomain"></action>
+		
+		<action name="createTenant" class="com.pms.action.TenantAction" method ="createTenant"></action>	 	
+		<action name="modifyTenantInfo" class="com.pms.action.TenantAction" method ="modifyTenantInfo"></action>	 	
+		<action name="getTenantInfoById" class="com.pms.action.TenantAction" method ="getTenantInfoById"></action>	 	
+		<action name="getTenantAll" class="com.pms.action.TenantAction" method ="getTenantAll"></action>	 	
+		<action name="deleteTenantById" class="com.pms.action.TenantAction" method ="deleteTenantById"></action>
+		
+		<action name="init_apartment" class ="com.pms.action.ApartmentAction" method="init_apartment"></action>	 	
+		<action name="createApartment" class ="com.pms.action.ApartmentAction" method="createApartment"></action>	 	
+		<action name="deleteApartmentById" class ="com.pms.action.ApartmentAction" method="deleteApartmentById"></action>	 	
+		<action name="deleteApartmentByIds" class ="com.pms.action.ApartmentAction" method="deleteApartmentByIds"></action>	 	
+		<action name="modifyApartment" class ="com.pms.action.ApartmentAction" method="modifyApartment"></action>	 	
+		<action name="getApartmentAll" class ="com.pms.action.ApartmentAction" method="getApartmentAll"></action>	 	
+		<action name="getApartmentById" class ="com.pms.action.ApartmentAction" method="getApartmentById"></action>	 	
+		<action name="getAllRoomInfo" class ="com.pms.action.ApartmentAction" method="getAllRoomInfo"></action>	 	
+		<action name="modifyContractInfo" class ="com.pms.action.ApartmentAction" method="modifyContractInfo"></action>	 	
+		<action name="check_in" class ="com.pms.action.ApartmentAction" method="check_in"></action>	 	
+		<action name="refresh_monthfee_status" class ="com.pms.action.ApartmentAction" method="refresh_monthfee_status"></action>	 	
+		<action name="refesh_other_remind" class ="com.pms.action.ApartmentAction" method="refesh_other_remind"></action>	 	
+		<action name="charge_other_fee" class ="com.pms.action.ApartmentAction" method="charge_other_fee"></action>	 	
+		<action name="charge_month_fee" class ="com.pms.action.ApartmentAction" method="charge_month_fee"></action>	 	
+		<action name="getall_TLT" class ="com.pms.action.ApartmentAction" method="getall_TLT"></action>	 	
+		<action name="getAll_CTL" class ="com.pms.action.ApartmentAction" method="getAll_CTL"></action>	 	
+		<action name="charge_owe_fee" class ="com.pms.action.ApartmentAction" method="charge_owe_fee"></action>	 	
+		<action name="check_out" class ="com.pms.action.ApartmentAction" method="check_out"></action>	 	
+		<action name="get_current_cycle" class ="com.pms.action.ApartmentAction" method="get_current_cycle"></action>	 	
+		
+		
+		<action name="get_check_in_ratio" class ="com.pms.action.FeeHistoryAction" method="get_check_in_ratio"></action>	 	
+		<action name="get_charge_statistics" class ="com.pms.action.FeeHistoryAction" method="get_charge_statistics"></action>	 	
+		<action name="getAllFeeHistory" class ="com.pms.action.FeeHistoryAction" method="getAllFeeHistory"></action>
+		
+		<action name="getMessageSwitchStatus" class ="com.pms.action.MessageAction" method="getMessageSwitchStatus"></action>
+		
+		<action name="modifyMessgeSwitchStatus" class ="com.pms.action.MessageAction" method="modifyMessgeSwitchStatus"></action>
+		<action name="sendMessage" class ="com.pms.action.MessageAction" method="sendMessage"></action>
+		<action name="saveMessageToDB" class ="com.pms.action.MessageAction" method="saveMessageToDB"></action>
+		<action name="fileDownload" class="com.pms.action.MessageAction">  
+           <result name="success" type="stream">  
+               <param name="contentType">text/plain</param>  
+               <param name="contentDisposition">attachment;fileName="${fileName}"</param>  
+               <param name="inputName">downloadFile</param>  
+               <param name="bufferSize">1024</param>  
+           </result>  
+       </action> 
+			 	
+	 	
+	</package>
+	
+</struts>

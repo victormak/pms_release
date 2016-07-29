@@ -1,0 +1,127 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="bootstrap/docs/favicon.ico">
+
+    <title>新闻中心</title>
+	<link href="bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+	
+    <script src="bootstrap/docs/assets/js/ie-emulation-modes-warning.js"></script>
+	
+    <!-- Bootstrap core CSS -->
+    <link href="bootstrap/docs/examples/carousel/carousel.css" rel="stylesheet">
+    <script src="bootstrap/js/tests/vendor/jquery.min.js"></script>
+    <script src="bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="bootstrap/docs/assets/js/docs.min.js"></script>
+    <script src="bootstrap/docs/assets/js/ie10-viewport-bug-workaround.js"></script>
+    <!-- Custom styles for this template -->
+    <link href="bootstrap/docs/examples/blog/blog.css" rel="stylesheet">
+	<script type="text/javascript">
+		$(document).ready(function(){
+			$.ajax({
+				url:'getPressById.action',
+				dataType:'json',
+				data:{'id':'1'},
+				success:function(data){
+					
+					var author = "  作者  "+data.press_auth+"";
+					$('#press_create_time').text(data.press_create_time+author);
+					$('#press_title').text(data.press_title);
+					$('#press_content').text("   "+data.press_content);
+					console.log(data.press_create_time);
+				}
+			});
+		});
+	</script>
+
+  </head>
+
+  <body>
+
+    <div class="blog-masthead">
+      <div class="container">
+        <nav class="blog-nav">
+          <a class="blog-nav-item active" href="#">首页</a>
+          <a class="blog-nav-item" href="#">新闻中心</a>
+          <a class="blog-nav-item" href="#">Press</a>
+          <a class="blog-nav-item" href="#">New hires</a>
+          <a class="blog-nav-item" href="#">关于</a>
+        </nav>
+      </div>
+    </div>
+
+    <div class="container">
+
+      <div class="blog-header">
+        <h1 class="blog-title">The Bootstrap Blog</h1>
+        <p class="lead blog-description">The official example template of creating a blog with Bootstrap.</p>
+      </div>
+
+      <div class="row">
+
+        <div class="col-sm-8 blog-main">
+
+          <div class="blog-post">
+            <h2 class="blog-post-title" id="press_title">Sample blog post</h2>
+            <p class="blog-post-meta" id="press_create_time"></p>
+            <p id="press_content"></p>
+            <hr>
+            <p>Cum sociis natoque penatibus et magnis <a href="#">dis parturient montes</a>, nascetur ridiculus mus. Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum. Sed posuere consectetur est at lobortis. Cras mattis consectetur purus sit amet fermentum.</p>
+            <blockquote>
+              <p>Curabitur blandit tempus porttitor. <strong>Nullam quis risus eget urna mollis</strong> ornare vel eu leo. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
+            </blockquote>
+            <p>Etiam porta <em>sem malesuada magna</em> mollis euismod. Cras mattis consectetur purus sit amet fermentum. Aenean lacinia bibendum nulla sed consectetur.</p>
+          </div><!-- /.blog-post -->
+
+
+          <ul class="pager">
+            <li><a href="#">上一篇</a></li>
+            <li><a href="#">下一篇</a></li>
+          </ul>
+
+        </div><!-- /.blog-main -->
+
+        <div class="col-sm-3 col-sm-offset-1 blog-sidebar">
+          <div class="sidebar-module sidebar-module-inset">
+            <h4>通知</h4>
+            <p>Etiam porta <em>sem malesuada magna</em> mollis euismod. Cras mattis consectetur purus sit amet fermentum. Aenean lacinia bibendum nulla sed consectetur.</p>
+          </div>
+          <div class="sidebar-module">
+            <h4>新闻分类</h4>
+            <ol class="list-unstyled">
+              <li><a href="#">纪要类</a></li>
+              <li><a href="#">总结类</a></li>
+              <li><a href="#">动态类</a></li>
+            </ol>
+          </div>
+          <div class="sidebar-module">
+            <h4>链接</h4>
+            <ol class="list-unstyled">
+              <li><a href="#">中国电科院</a></li>
+              <li><a href="#">中国神华集团</a></li>
+              <li><a href="#">国王电科院</a></li>
+            </ol>
+          </div>
+        </div><!-- /.blog-sidebar -->
+
+      </div><!-- /.row -->
+
+    </div><!-- /.container -->
+
+    <div class="blog-footer">
+      <p>Blog template built for <a href="http://getbootstrap.com">Bootstrap</a> by <a href="https://twitter.com/mdo">@mdo</a>.</p>
+      <p>
+        <a href="#">回到顶层</a>
+      </p>
+    </div>
+
+
+
+  </body>
+</html>

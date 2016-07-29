@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>欧咪啦物业管理</title>
+    <meta name="description" content="mis">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" href="css/app.v1.css">
+    <link rel="stylesheet" href="css/bootstrap-table.min.css">
+    <link rel="stylesheet" href="css/user_manager.css">
+    <!--[if lt IE 9]>
+    <script src="js/ie/respond.min.js" cache="false"></script>
+    <script src="js/ie/html5.js" cache="false"></script>
+    <script src="js/ie/fix.js" cache="false"></script> <![endif]-->
+    <script src="css/app.v1.js"></script>
+    <script src="js/tableExport.js"></script>
+    <script src="js/bootstrap-table.js"></script>
+    <script src="js/bootstrap-table-export.js"></script>
+    <script src="js/bootstrap-table-zh-CN.js"></script>
+    <script>
+    $.extend($.fn.bootstrapTable.defaults, $.fn.bootstrapTable.locales['zh-CN']);
+    </script>
+    <script src="js/jquery.toggle-password.js"></script>
+    <script src="js/Chart.js"></script>
+    <script src="js/jquery.cookie.js"></script>
+</head>
+
+<body>
+    <section class="hbox stretch">
+        <!-- .aside -->
+        <aside class="bg-dark aside-sm" id="nav">
+            <section class="vbox">
+                <header class="dker nav-bar">
+                    <a href="#" class="nav-brand" data-toggle="fullscreen" id="navi_domain"></a>
+                    <a class="btn btn-link visible-xs" data-toggle="class:show" data-target=".nav-user">
+                        <i class="icon-comment-alt"></i>
+                    </a>
+                </header>
+                <footer class="footer bg-gradient hidden-xs">
+                    <a href="login.html" class="btn btn-sm btn-link m-r-n-xs pull-right">
+                        <i class="icon-off"></i>
+                    </a>
+                </footer>
+                <section>
+                    <!-- user -->
+                    <div class="bg-success nav-user hidden-xs pos-rlt">
+                        <div class="nav-avatar pos-rlt">
+                            <a href="#" class="thumb-sm avatar animated rollIn" data-toggle="dropdown">
+                                <img src="images/avatar.jpg" alt="" class="">
+                                <span class="caret caret-white"></span>
+                            </a>
+                            <ul class="dropdown-menu m-t-sm animated fadeInLeft">
+                                <span class="arrow top"></span>
+                                <li><a href="login.html">logout</a></li>
+                            </ul>
+                        </div>
+                        <div class="nav-msg">
+                            <a class="dropdown-toggle" data-toggle="dropdown">
+                                <b class="badge badge-white count-n" id="navi_user_name"></b>
+                            </a>
+                        </div>
+                    </div>
+                    <!-- / user -->
+                    <!-- nav -->
+                    <nav class="nav-primary hidden-xs">
+                        <ul class="nav">
+                            <li>
+                                <a href="overall.html">
+                                    <i class="icon-home"></i>
+                                    <span>房间一览</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="room_manager.html">
+                                    <!-- <b class="badge bg-primary pull-right">3</b>  -->
+                                    <i class="icon-building"></i>
+                                    <span>房间管理</span>
+                                </a>
+                            </li>
+                            <li id="domain_menu_item" style="display:none">
+                                <a href="domain_manager.html">
+                                    <i class="icon-sitemap"></i>
+                                    <span>物业管理</span>
+                                </a>
+                            </li>
+                            <li class="active">
+                                <!-- <a href="#" class="dropdown-toggle" data-toggle="dropdown"> -->
+                                <a href="record.html">
+                                    <i class="icon-tasks"></i>
+                                    <span>收费历史</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="settings.html">
+                                    <!-- <b class="badge bg-primary pull-right">3</b>  -->
+                                    <i class="icon-book"></i>
+                                    <span>设&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp置</span>
+                                </a>
+                            </li>
+                            <li id="user_menu_item" style="display:none">
+                                <a href="user_manager.html">
+                                    <!-- <b class="badge bg-primary pull-right">3</b>  -->
+                                    <i class="icon-group"></i>
+                                    <span>用户管理</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </nav>
+                    <!-- / nav -->
+                    <!-- note -->
+                    <!-- <div class="bg-danger wrapper hidden-vertical animated rollIn text-sm">
+                            <a href="#" data-dismiss="alert" class="pull-right m-r-n-sm m-t-n-sm"><i class="icon-close icon-remove "></i></a>
+                            Hi, this is welcome msg.
+                        </div> -->
+                    <!-- / note -->
+                </section>
+            </section>
+        </aside>
+        <!-- /.aside -->
+        <!-- .vbox -->
+        <section id="content">
+            <section>
+                <header class="header bg-white b-b">
+                    <p>收费历史</p>
+                </header>
+                <div class="container" style="padding-top: 20px;">
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <section class="panel">
+                                <header class="panel-heading" style="font-size: 15px;">今年收费统计&nbsp&nbsp（单位：元）</header>
+                                <canvas id="canvas"></canvas>
+                            </section>
+                        </div>
+                        <div class="col-lg-6">
+                            <section class="panel">
+                                <header class="panel-heading" style="font-size: 15px;">当前入住率&nbsp&nbsp（单位：百分比）</header>
+                                <canvas id="myPieChart"></canvas>
+                            </section>
+                        </div>
+                    </div>
+                    <div class="line"></div>
+                    <table style="background: #EBF8EC" id="table" data-show-columns="true" data-search="true" data-toolbar="#toolbar" data-show-toggle="true" data-pagination="true" data-height="525" data-striped="true" data-id-field="id" data-url="getAllFeeHistory.action" data-checkbox-header="true" data-show-pagination-switch="true" data-page-list="[10, 25, 50, 100, 全部]">
+                    </table>
+                </div>
+            </section>
+            <a href="login.html" class="hide nav-off-screen-block" data-toggle="class:nav-off-screen" data-target="body"></a>
+        </section>
+        <!-- /.vbox -->
+    </section>
+    <!-- Bootstrap -->
+    <!-- Sparkline Chart -->
+    <!-- App -->
+    <script src="js/record.js"></script>
+</body>
+
+</html>

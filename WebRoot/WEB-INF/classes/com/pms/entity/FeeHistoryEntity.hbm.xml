@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+	<class name="com.pms.entity.FeeHistoryEntity" table="feehistory">
+		<id name="id" type="java.lang.Integer" column="id">
+			<generator class="increment"></generator>
+		</id>
+		<property name ="feehistory_id" type="java.lang.Integer" column="feehistory_id" ></property>
+		<property name="tenant_name" type="string" column="tenant_name" length="50"></property>
+		<property name="user_name" type="string" column="user_name" length="50"></property>
+		<property name="create_time" type="string" column="create_time" length="50"></property>
+		<property name="fee_items" type="string" column="fee_items" length="50"></property>
+		<property name="apartment_name" type="string" column="apartment_name" length="50"></property>
+		<property name="electric_fee" type="string" column="electric_fee" length="50"></property>
+		<property name="water_fee" type="string" column="water_fee" length="50"></property>
+		<property name="net_fee" type="string" column="net_fee" length="50"></property>
+		<property name="trash_fee" type="string" column="trash_fee" length="50"></property>
+		<property name="month_fee" type="string" column="month_fee" length="50"></property>
+	</class>
+</hibernate-mapping>

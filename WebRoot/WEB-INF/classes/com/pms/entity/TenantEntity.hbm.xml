@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+	<class name="com.pms.entity.TenantEntity" table="tenant">
+		<id name="id" type="java.lang.Integer" column="id">
+			<generator class="increment"></generator>
+		</id>
+		<property name ="tenant_id" type="java.lang.Integer" column="tenant_id" ></property>
+		<property name="tenant_name" type="string" column="tenant_name" length="50"></property>
+		<property name="tenant_age" type="java.lang.Integer" column="tenant_age" length="50"></property>
+		<property name="tenant_sex" type="string" column="tenant_sex" length="50"></property>
+		<property name="tenant_phonenumber" type="string" column="tenant_phonenumber" length="50"></property>
+		<property name="tenant_desc" type="string" column="tenant_desc" length="50"></property>
+		<property name="tenant_status" type="string" column="tenant_status" length="50"></property>
+	</class>
+</hibernate-mapping>

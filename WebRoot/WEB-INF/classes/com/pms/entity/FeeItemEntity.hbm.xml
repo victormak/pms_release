@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+	<class name="com.pms.entity.FeeItemEntity" table="fee_item">
+		<id name="id" type="java.lang.Integer" column="id">
+			<generator class="increment"></generator>
+		</id>
+		<property name ="feeitem_id" type="java.lang.Integer" column="feeitem_id" ></property>
+		<property name="feeitem_name" type="string" column="feeitem_name" length="50"></property>
+		<property name="feeitem_price" type="string" column="feeitem_price" length="50"></property>
+		<property name="feeitem_desc" type="string" column="feeitem_desc" length="50"></property>
+	</class>
+</hibernate-mapping>

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+	<class name="com.pms.entity.MessageEntity" table="message">
+		<id name="id" type="java.lang.Integer" column="id">
+			<generator class="increment"></generator>
+		</id>
+		<property name ="message_id" type="java.lang.Integer" column="message_id" ></property>
+		<property name="message_create_user" type="string" column="message_create_user" length="50"></property>
+		<property name="message_to_apartement_id" type="java.lang.Integer" column="message_to_apartement_id" length="50"></property>
+		<property name="message_content" type="string" column="message_content" length="50"></property>
+		<property name="message_create_time" type="string" column="message_create_time" length="50"></property>
+		<property name="message_status" type="java.lang.Integer" column="message_status" length="50"></property>
+		<property name="message_to_apartment_name" type="string" column="message_to_apartment_name" length="50"></property>
+		<property name="message_to_tenant_name" type="string" column="message_to_tenant_name" length="50"></property>
+		<property name="message_to_tenant_number" type="string" column="message_to_tenant_number" length="50"></property>
+	</class>
+</hibernate-mapping>

@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>firebugs.html</title>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="description" content="">
+        <meta name="author" content="">
+        <link rel="icon" href="bootstrap/docs/favicon.ico">
+        <link href="bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+        <script src="bootstrap/docs/assets/js/ie-emulation-modes-warning.js">
+        </script>
+        <link href="bootstrap/docs/examples/carousel/carousel.css" rel="stylesheet">
+        <script src="bootstrap/js/tests/vendor/jquery.min.js">
+        </script>
+        <script src="bootstrap/dist/js/bootstrap.min.js">
+        </script>
+        <script src="bootstrap/docs/assets/js/docs.min.js">
+        </script>
+        <script src="bootstrap/docs/assets/js/ie10-viewport-bug-workaround.js">
+        </script>
+        <script type="text/javascript">
+            function signin(){
+                console.log("123456");
+            }
+			function save_user(){
+//				document.getElementById('createUser').submit();
+//				$.ajax({
+//					url:'sigin.action',
+//					type:'post',
+//					data:$('#createUser').serialize(),
+//					async: false,
+//					success:function(){
+//						
+//					}
+//				});
+			$.ajax({
+				url:'createUser.action',
+				type:'post',
+				data:$('#createUser').serialize(),
+				async:false,
+				success:function(){
+					$.ajax({
+					url:'sigin.action',
+					type:'post',
+					data:$('#createUser').serialize(),
+					async: false,
+					success:function(){
+						alert('注册/登录成功');
+					}
+				});
+				}
+			});
+			}
+        </script>
+    </head>
+    <body>
+        <div class="navbar-wrapper">
+            <div class="container">
+                <nav class="navbar navbar-default navbar-static-top" role="navigation">
+                    <div class="container">
+                        <div class="navbar-header">
+                            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                                <span class="sr-only">Toggle navigation</span>
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                            </button>
+                            <a class="navbar-brand" href="#">FireBugs</a>
+                        </div>
+                        <div id="navbar" class="navbar-collapse collapse">
+                            <ul class="nav navbar-nav">
+                                <li class="active">
+                                    <a href="#">首页</a>
+                                </li>
+                                <li>
+                                    <a href="press_center.html">NA</a>
+                                </li>
+                                <li class="dropdown">
+                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Other<span class="caret"></span></a>
+                                    <ul class="dropdown-menu" role="menu">
+                                        <li>
+                                            <a href="#">Action</a>
+                                        </li>
+                                        <li>
+                                            <a href="#">Another action</a>
+                                        </li>
+                                        <li>
+                                            <a href="#">Something else here</a>
+                                        </li>
+                                        <li class="divider">
+                                        </li>
+                                        <li class="dropdown-header">
+                                            Nav header
+                                        </li>
+                                        <li>
+                                            <a href="#">Separated link</a>
+                                        </li>
+                                        <li>
+                                            <a href="#">One more separated link</a>
+                                        </li>
+                                    </ul>
+                                </li>
+                            </ul>
+                            <p class="navbar-text navbar-right ">
+                                <a href="#" class="navbar-link">登录</a>
+                            </p>
+                            <p class="navbar-text navbar-right " data-toggle="modal" data-target="#signinModal" >
+                                <a href="#" class="navbar-link">注册</a>
+                            </p>
+                            <!--
+                            <button type="button" onclick="signin()" class="btn btn-default navbar-btn navbar-right ">��¼</button>
+                            -->
+                        </div>
+                    </div>
+                </nav>
+            </div>
+        </div>
+        <!-- Modal sign in -->
+        <div class="modal fade" id="signinModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">
+                            <span aria-hidden="true">&times;</span>
+                            <span class="sr-only">Close</span>
+                        </button>
+                        <h4 class="modal-title" id="myModalLabel">注册用户</h4>
+                    </div>
+                    <div class="modal-body">
+                       <div style="padding: 50px 50px 10px;">
+						      <form class="bs-example bs-example-form" id="createUser" action="createUser.action" method="post" role="form">
+                                  <div class="input-group  ">
+                                     <span class="input-group-addon">昵 称：</span>
+                                     <input name="user.user_name" id="user_name" type="text" class="form-control" placeholder="用户登录名称..">
+                                  </div><br>
+								  <div class="input-group ">
+							         <span class="input-group-addon">密 码：</span>
+							         <input name="user.user_pass" id="user_pass" type="text" class="form-control" placeholder="用户密码..">
+							      </div><br>
+							      <div class="input-group ">
+							         <span class="input-group-addon">邮  箱：</span>
+							         <input name="user.user_email" id="user_email" type="text" class="form-control" placeholder="用户邮箱/登录名..">
+							      </div><br>
+								  </form>
+						    </div> <!-- /container -->
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">
+                            Close
+                        </button>
+                        <button type="button" onclick="save_user()" class="btn btn-primary" data-dismiss="modal">
+                            Save changes
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Modal --><!-- Carousel
+        ================================================== -->
+        <div id="myCarousel" class="carousel slide" data-ride="carousel">
+            <!-- Indicators -->
+            <ol class="carousel-indicators">
+                <li data-target="#myCarousel" data-slide-to="0" class="active">
+                </li>
+                <li data-target="#myCarousel" data-slide-to="1">
+                </li>
+                <li data-target="#myCarousel" data-slide-to="2">
+                </li>
+            </ol>
+            <div class="carousel-inner" role="listbox">
+                <div class="item active">
+                    <img src="favoriteImage/Wallpaper20141011.jpg" alt="First slide">
+                    <div class="container">
+                        <div class="carousel-caption">
+                            <h1>FireBugs让你的团队有条不紊</h1>
+                            <p>
+                                我们为自己代言
+                            </p>
+                            <p>
+                                <a class="btn btn-lg btn-primary" onclick="s()" role="button">现在就加入</a>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="item">
+                    <img src="favoriteImage/Wallpaper-2014-10-13.jpg" alt="Second slide">
+                    <div class="container">
+                        <div class="carousel-caption">
+                            <h1>FireBugs</h1>
+                            <p>
+                                简洁、直观、强悍的前端开发框架，让web开发更迅速、简单。
+                            </p>
+                            <p>
+                                <a class="btn btn-lg btn-primary" href="#" role="button">了解更多</a>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="item">
+                    <img src="data:image/gif;base64,R0lGODlhAQABAIAAAFVVVQAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="Third slide">
+                    <div class="container">
+                        <div class="carousel-caption">
+                            <h1>One more for good measure.</h1>
+                            <p>
+                                Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.
+                            </p>
+                            <p>
+                                <a class="btn btn-lg btn-primary" href="#" role="button">Browse gallery</a>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev"><span class="glyphicon glyphicon-chevron-left"></span><span class="sr-only">Previous</span></a>
+            <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next"><span class="glyphicon glyphicon-chevron-right"></span><span class="sr-only">Next</span></a>
+        </div>
+        <!-- /.carousel -->
+        <footer class="footer ">
+            <div class="container">
+                <div class="row footer-top">
+                    <div class="col-sm-6 col-lg-6">
+                        <h1><!--<img src="http://static.bootcss.com/www/assets/img/logo.png">-->FireBugs</h1>
+                        <p>
+                            本网站所列功能均有Leos团队完成，如有问题请邮件给我们！
+                        </p>
+                    </div>
+                    <div class="col-sm-6  col-lg-5 col-lg-offset-1">
+                        <div class="row about">
+                            <div class="col-xs-3">
+                                <h4>关于</h4>
+                                <ul class="list-unstyled">
+                                    <li>
+                                        <a href="#">关于我们</a>
+                                    </li>
+                                    <li>
+                                        <a href="#">广告合作</a>
+                                    </li>
+                                    <li>
+                                        <a href="#">友情链接</a>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="col-xs-6">
+                                <h4>联系方式</h4>
+                                <ul class="list-unstyled">
+                                    <li>
+                                        <a href="#" title="" target="_blank">中国科学技术大学 苏州研究院</a>
+                                    </li>
+                                    <li>
+                                        <a href="#">电子邮件</a>
+                                    </li>
+                                    <li>
+                                        <a href="mailto:sun-guangning@126.com">sun-guangning@126.com</a>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="col-xs-3">
+                                <h4>赞助商</h4>
+                                <ul class="list-unstyled">
+                                    <li>
+                                        <a href=""></a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <hr>
+                <div class="row footer-bottom">
+                    <ul class="list-inline text-center">
+                        <li>
+                            <a href="http://www.miibeian.gov.cn/" target="_blank">京ICP备00000000号</a>
+                        </li>
+                        <li>
+                            京公网安备000000000000
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </footer>
+    </body>
+</html>

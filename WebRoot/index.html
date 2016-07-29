@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" media="all" href="/assets/css/bootstrap.css">
+    <link rel="stylesheet" media="all" href="/assets/css/bootstrap-responsive.css">
+</head>
+<body>
+    <TABLE>
+        <tr>                                
+            <td class="center">张三</td>
+            <td class="center">2012/10/28 22:28:42</td>
+            <td class="center">呵呵呵呵呵呵</td>
+            <td class="center">      
+               <a class="btn btn-info" href="javascript:void(0)" onclick="dodel(1)">
+                删除                                            
+               </a>                             
+            </td>  
+        </tr>
+        <tr>                        
+           <td class="center">李四</td>
+           <td class="center">2012/10/28 22:31:12</td>
+           <td class="center">哈哈哈哈哈</td>
+           <td class="center">      
+             <a class="btn btn-info" href="javascript:void(0)" onclick="dodel(2)">
+              删除                                            
+              </a>                              
+           </td>  
+        </tr>   
+    </TABLE>
+    <div class="modal hide" id="Del">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">×</button>
+            <h3>删除确认</h3>
+        </div>
+        <div class="modal-body">
+            <p>您确认要删除此条吗？...</p>
+        </div>
+        <div class="modal-footer">
+            <a href="#" class="btn" data-dismiss="modal">取消</a>
+            <a href="Del.asp?id=XXX" class="btn btn-primary">确认删除</a>
+        </div>
+    </div>
+</body>
+</html>
+<script src="/assets/js/jquery.js"></script>
+<script src="/assets/lib/bootstrap.min.js"></script>
+<script type="text/javascript">
+    function dodel(id){
+        $('.modal').modal('show').on('shown',function(){
+            $(".btn-primary").attr('href','Del.asp?id='+id);
+        })
+    }
+</script>

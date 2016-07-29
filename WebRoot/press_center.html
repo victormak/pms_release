@@ -1,0 +1,103 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>新闻中心</title>
+
+    <link href="bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="bootstrap/docs/assets/js/ie-emulation-modes-warning.js"></script>
+    <link href="bootstrap/docs/examples/carousel/carousel.css" rel="stylesheet">
+    <script src="bootstrap/js/tests/vendor/jquery.min.js"></script>
+    <script src="bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="bootstrap/docs/assets/js/docs.min.js"></script>
+    <script src="bootstrap/docs/assets/js/ie10-viewport-bug-workaround.js"></script>
+	
+	 <!-- Custom styles for this template -->
+    <link href="bootstrap/docs/examples/blog/blog.css" rel="stylesheet">
+	<script type="text/javascript">
+		$(document).ready(function(){
+			$.ajax({
+				url:'getallpress.action',
+				dataType:'json',
+				success: function(data){
+					for(var i=0;i<3;i++){
+						document.getElementById('press_image1').src=data[0].press_image_path;
+						document.getElementById('press_image2').src=data[0].press_image_path;
+						document.getElementById('press_image3').src=data[0].press_image_path;
+						$("#press_content1").text(data[0].press_content);
+						$("#press_content2").text(data[1].press_content);
+						$("#press_content3").text(data[2].press_content);
+						$("#press_title1").text(data[0].press_title);
+						$("#press_title2").text(data[1].press_title);
+						$("#press_title3").text(data[2].press_title);
+					}
+				}	
+			});
+		});
+			function show_detial(){
+			   $.ajax({
+			   	url:'getPressById',
+				data:'data:'+1,
+				dataType:'json',
+			   });
+			}
+		
+	</script>
+</head>
+<body>
+	 <div class="blog-masthead">
+      <div class="container">
+        <nav class="blog-nav">
+          <a class="blog-nav-item active" href="#">首页</a>
+          <a class="blog-nav-item" href="#">新闻中心</a>
+          <a class="blog-nav-item" href="#">Press</a>
+          <a class="blog-nav-item" href="#">New hires</a>
+          <a class="blog-nav-item" href="#">关于</a>
+        </nav>
+      </div>
+    </div>
+	<div class="container marketing">
+	 <!-- START THE FEATURETTES -->
+
+      <hr class="featurette-divider">
+
+      <div class="row featurette">
+        <div class="col-md-7">
+          <h2 class="featurette-heading" id="press_title1"> <span class="text-muted">It'll blow your mind.</span></h2><br/><br/>
+          <p class="lead" id="press_content1"></p>
+        </div>
+        <div class="col-md-5">
+          <img id="press_image1" onclick="show_detial()" class="featurette-image img-responsive"  alt="Generic placeholder image">
+        </div>
+      </div>
+
+      <hr class="featurette-divider">
+
+      <div class="row featurette">
+        <div class="col-md-5">
+          <img id="press_image2" class="featurette-image img-responsive" data-src="holder.js/500x500/auto" alt="Generic placeholder image">
+        </div>
+        <div class="col-md-7">
+          <h2 class="featurette-heading" id="press_title2"><span class="text-muted">See for yourself.</span></h2><br/><br/>
+          <p class="lead" id="press_content2"></p>
+        </div>
+      </div>
+
+      <hr class="featurette-divider">
+
+      <div class="row featurette">
+        <div class="col-md-7">
+          <h2 class="featurette-heading" id="press_title3"><span class="text-muted">Checkmate.</span></h2><br/><br/>
+          <p class="lead" id="press_content3"></p>
+        </div>
+        <div class="col-md-5">
+          <img id="press_image3" class="featurette-image img-responsive" data-src="holder.js/500x500/auto" alt="Generic placeholder image">
+        </div>
+      </div>
+
+      <hr class="featurette-divider">
+
+      <!-- /END THE FEATURETTES -->
+ </div><!-- /.container -->
+</body>
+</html>

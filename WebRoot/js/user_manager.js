@@ -109,21 +109,35 @@ $(document).ready(function() {
         },
         'click .remove': function(e, value, row, index) {
             console.log(row.user_id);
+
             var userId = row.user_id;
             if (userId !== 10000) {
-                $.ajax({
-                    url: "deleteSystemUserByUserId.action",
-                    dataType: "json",
-                    data: { "user_id": row.user_id }
+
+                $('#deleteUser').modal();
+                $('#deleteUserMsg').html(row.user_name + ' ?');
+
+                $('#deleteUserOk').click(function() {
+
+                    $.ajax({
+                        url: "deleteSystemUserByUserId.action",
+                        dataType: "json",
+                        data: { "user_id": row.user_id }
+                    });
+                    $table.bootstrapTable('remove', {
+                        field: 'id',
+                        values: [row.id]
+                    });
+                    $('#deleteUser').modal('hide');
                 });
-                $table.bootstrapTable('remove', {
-                    field: 'id',
-                    values: [row.id]
-                });
-            }
-            else {
+
+            } else {
                 alert("不允许删除超级管理员！");
             }
+
+
+
+
+
         }
     };
 

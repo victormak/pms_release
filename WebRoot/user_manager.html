@@ -134,7 +134,6 @@
                         <button id="add" class="btn btn-success " data-toggle="modal" onclick="onAddUser()">
                             <i class="icon-plus"></i> 添加用户
                         </button>
-
                     </div>
                     <table style="background: #EBF8EC" id="table" data-show-columns="true" data-search="true" data-toolbar="#toolbar" data-show-toggle="true" data-pagination="true" data-height="525" data-striped="true" data-id-field="id" data-url="getAllUsers.action" data-checkbox-header="true" data-show-pagination-switch="true" data-page-list="[10, 25, 50, 100, 全部]">
                     </table>
@@ -202,7 +201,7 @@
                             <div class="col-sm-8">
                                 <div class="input-group">
                                     <input name="user.user_pass" class="form-control" id="modifyUserPass" type="password" placeholder="请输入密码...">
-                                    <span class="btn btn-white btn-xs input-group-addon" id="btn_show_pass" >
+                                    <span class="btn btn-white btn-xs input-group-addon" id="btn_show_pass">
                                         <i class="icon-eye-close text-gray"></i>
                                     </span>
                                 </div>
@@ -252,6 +251,26 @@
                     <div class="modal-footer">
                         <button type="button" class="btn btn-primary" data-dismiss="modal">取消</button>
                         <button type="submit" class="btn btn-success">添加</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="deleteUser" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title text-danger" id="myModalLabel">警告</h4>
+                </div>
+                <form id="add_user_form" action="" class="form-horizontal" role="form" method="post">
+                    <div class="modal-body">
+                        <p>确认删除</p>
+                        <p class="text-left text-justify" id="deleteUserMsg"></p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" data-dismiss="modal">取消</button>
+                        <button type="button" id="deleteUserOk" class="btn btn-success">确定</button>
                     </div>
                 </form>
             </div>
